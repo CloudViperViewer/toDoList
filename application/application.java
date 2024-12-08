@@ -1,8 +1,10 @@
 package application;
 
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -34,14 +36,24 @@ public class application {
     {
         try
         {
-            InputStream fileStream = Files.newInputStream(Paths.get("index.html"));
-            byte[] content = fileStream.readAllBytes();
-            fileStream.close();
+            Path indexPath = Paths.get("index.html");
+
+            if (!Files.exists(indexPath)) {
+                serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), "text/plain; charset=UTF-8");
+                return;
+            }
+            
+            byte[] content;
+            try(InputStream fileStream = Files.newInputStream(indexPath)){
+                content = fileStream.readAllBytes();
+                fileStream.close();
+            }            
 
             serverUtils.sendResponse(exchange, 200, content, "text/html; charset=UTF-8");
         }
-        catch(Exception e)
+        catch(IOException e)
         {
+            
             System.out.println(e.getMessage());
         }
 
