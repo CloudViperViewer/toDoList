@@ -22,6 +22,11 @@ public class serverUtils {
         if (exchange == null ||  content == null || contentType == null) {
             throw new IllegalArgumentException("Parameters cannot be null");
         }
+
+        if (responseCode < 100 || responseCode > 599) {
+            throw new IllegalArgumentException("Invalid response code");
+        }
+        
         exchange.getResponseHeaders().add("Content-Type", contentType);
         exchange.sendResponseHeaders(responseCode, content.length);
             

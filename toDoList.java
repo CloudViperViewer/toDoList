@@ -21,9 +21,10 @@ public class toDoList
         }
         catch(Exception error)
         {
-            System.out.println(error.getMessage());
+            System.out.println("Server failed to start: " + error.getMessage());
         }
 
+        //Create and start application on server
         app = new application(myServer);
         app.start();
 

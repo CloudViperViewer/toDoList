@@ -54,7 +54,15 @@ public class application {
         catch(IOException e)
         {
             
-            System.out.println(e.getMessage());
+            System.err.println("Error serving index page" + e.getMessage());
+
+            try{
+                serverUtils.sendResponse(exchange, 500, "Internal server error".getBytes(), "text/html; charset=UTF-8");
+            }
+            catch(IOException ignored)
+            {
+                //already in error handle do nothing.
+            }
         }
 
     }
