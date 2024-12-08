@@ -16,6 +16,7 @@ import server.serverUtils;
 public class application {
     
     private server currentServer;
+    private static final Path BASE_PATH = Paths.get("application/resources");
 
     //create application
     public application(server in)
@@ -34,22 +35,42 @@ public class application {
 
     private void returnIndex(HttpExchange exchange)
     {
+        String fileName = "";
+
+        switch (exchange.getRequestURI().getPath()) {
+            case "/":
+                fileName = "index.html";
+                break;
+            case "/style.css":
+                fileName = "style.css";
+                break;
+            default:
+                fileName = "index.html";
+                break;
+        }
+
         try
         {
-            Path indexPath = Paths.get("index.html");
+            Path filePath = BASE_PATH.resolve(fileName).normalize();
 
-            if (!Files.exists(indexPath)) {
-                serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), "text/plain; charset=UTF-8");
+            if (!filePath.startsWith(BASE_PATH)) {
+                serverUtils.sendResponse(exchange, 403, "Access denied".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "text/html; charset=UTF-8"));
+                return;
+            }
+
+            if (!Files.exists(filePath)) {
+                serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "text/html; charset=UTF-8"));
                 return;
             }
             
-            byte[] content;
-            try(InputStream fileStream = Files.newInputStream(indexPath)){
+            byte[] content;      
+            String fileExtenstion = applicationUtils.getFileExtenstion(fileName);     
+            try(InputStream fileStream = Files.newInputStream(filePath)){
                 content = fileStream.readAllBytes();
                 fileStream.close();
             }            
 
-            serverUtils.sendResponse(exchange, 200, content, "text/html; charset=UTF-8");
+            serverUtils.sendResponse(exchange, 200, content, serverUtils.CONTENT_TYPES.getOrDefault(fileExtenstion, "text/html; charset=UTF-8"));
         }
         catch(IOException e)
         {
@@ -57,7 +78,7 @@ public class application {
             System.err.println("Error serving index page" + e.getMessage());
 
             try{
-                serverUtils.sendResponse(exchange, 500, "Internal server error".getBytes(), "text/html; charset=UTF-8");
+                serverUtils.sendResponse(exchange, 500, "Internal server error".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "text/html; charset=UTF-8"));
             }
             catch(IOException ignored)
             {
