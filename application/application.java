@@ -16,6 +16,7 @@ import server.serverUtils;
 public class application {
     
     private server currentServer;
+    private static final Path BASE_PATH = Paths.get("application/resources");
 
     //create application
     public application(server in)
@@ -50,16 +51,21 @@ public class application {
 
         try
         {
-            Path indexPath = Paths.get(fileName);
+            Path filePath = BASE_PATH.resolve(fileName).normalize();
 
-            if (!Files.exists(indexPath)) {
+            if (!filePath.startsWith(BASE_PATH)) {
+                serverUtils.sendResponse(exchange, 403, "Access denied".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "text/html; charset=UTF-8"));
+                return;
+            }
+
+            if (!Files.exists(filePath)) {
                 serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "text/html; charset=UTF-8"));
                 return;
             }
             
             byte[] content;      
             String fileExtenstion = applicationUtils.getFileExtenstion(fileName);     
-            try(InputStream fileStream = Files.newInputStream(indexPath)){
+            try(InputStream fileStream = Files.newInputStream(filePath)){
                 content = fileStream.readAllBytes();
                 fileStream.close();
             }            
