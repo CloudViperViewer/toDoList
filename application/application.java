@@ -34,9 +34,23 @@ public class application {
 
     private void returnIndex(HttpExchange exchange)
     {
+        String fileName = "";
+
+        switch (exchange.getRequestURI().getPath()) {
+            case "/":
+                fileName = "index.html";
+                break;
+            case "/style.css":
+                fileName = "style.css";
+                break;
+            default:
+                fileName = "index.html";
+                break;
+        }
+
         try
         {
-            Path indexPath = Paths.get("index.html");
+            Path indexPath = Paths.get(fileName);
 
             if (!Files.exists(indexPath)) {
                 serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), "text/plain; charset=UTF-8");
