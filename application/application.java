@@ -53,17 +53,17 @@ public class application {
             Path indexPath = Paths.get(fileName);
 
             if (!Files.exists(indexPath)) {
-                serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), "text/plain; charset=UTF-8");
+                serverUtils.sendResponse(exchange, 404, "File not found".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "application/octet-stream"));
                 return;
             }
             
-            byte[] content;
+            byte[] content;           
             try(InputStream fileStream = Files.newInputStream(indexPath)){
                 content = fileStream.readAllBytes();
                 fileStream.close();
             }            
 
-            serverUtils.sendResponse(exchange, 200, content, "text/html; charset=UTF-8");
+            serverUtils.sendResponse(exchange, 200, content, "txt/html; charset=UTF-8");
         }
         catch(IOException e)
         {
@@ -71,7 +71,7 @@ public class application {
             System.err.println("Error serving index page" + e.getMessage());
 
             try{
-                serverUtils.sendResponse(exchange, 500, "Internal server error".getBytes(), "text/html; charset=UTF-8");
+                serverUtils.sendResponse(exchange, 500, "Internal server error".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "application/octet-stream"));
             }
             catch(IOException ignored)
             {

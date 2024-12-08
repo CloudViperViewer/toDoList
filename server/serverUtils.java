@@ -2,6 +2,7 @@ package server;
 
 
 import java.io.OutputStream;
+import java.util.Map;
 import java.io.IOException;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -9,6 +10,12 @@ import com.sun.net.httpserver.HttpHandler;
 
 public class serverUtils {
     
+    public static final Map<String, String> CONTENT_TYPES = Map.of(
+        "html", "text/html; charset=UTF-8",
+        "css", "text/css; charset=UTF-8",
+        "js", "application/javascript; charset=UTF-8",
+        "txt", "text/plain; charset=UTF-8"
+    );
 
     public static HttpHandler createHandle(createHttpHandle handle)
     {
