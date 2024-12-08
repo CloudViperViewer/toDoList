@@ -2,7 +2,6 @@ package application;
 
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -39,10 +38,7 @@ public class application {
             byte[] content = fileStream.readAllBytes();
             fileStream.close();
 
-            exchange.getResponseHeaders().add("Content-Type", "text/html; charset=UTF-8");
-            exchange.sendResponseHeaders(200, content.length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(content);
+            serverUtils.sendResponse(exchange, 200, content, "text/html; charset=UTF-8");
         }
         catch(Exception e)
         {
