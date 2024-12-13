@@ -4,9 +4,12 @@ public class applicationUtils {
     
     
 
-    public static String getFileExtenstion(String filePath)
+    public static String getFileExtension(String filePath)
     {
 
+        if (filePath == null) {
+            return "";
+        }
 
         int extIndex = filePath.lastIndexOf(".");
 

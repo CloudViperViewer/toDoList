@@ -64,13 +64,13 @@ public class application {
             }
             
             byte[] content;      
-            String fileExtenstion = applicationUtils.getFileExtenstion(fileName);     
+            String fileExtension = applicationUtils.getFileExtension(fileName);     
             try(InputStream fileStream = Files.newInputStream(filePath)){
                 content = fileStream.readAllBytes();
                 fileStream.close();
             }            
 
-            serverUtils.sendResponse(exchange, 200, content, serverUtils.CONTENT_TYPES.getOrDefault(fileExtenstion, "text/html; charset=UTF-8"));
+            serverUtils.sendResponse(exchange, 200, content, serverUtils.CONTENT_TYPES.getOrDefault(fileExtension, "text/html; charset=UTF-8"));
         }
         catch(IOException e)
         {
