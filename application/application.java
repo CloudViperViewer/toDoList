@@ -42,7 +42,7 @@ public class application {
                 fileName = "index.html";
                 break;
             case "/style.css":
-                fileName = "style.css";
+                fileName = "style.css";     
                 break;
             default:
                 fileName = "index.html";
@@ -52,6 +52,7 @@ public class application {
         try
         {
             Path filePath = BASE_PATH.resolve(fileName).normalize();
+            
 
             if (!filePath.startsWith(BASE_PATH)) {
                 serverUtils.sendResponse(exchange, 403, "Access denied".getBytes(), serverUtils.CONTENT_TYPES.getOrDefault("txt", "text/html; charset=UTF-8"));
@@ -64,7 +65,7 @@ public class application {
             }
             
             byte[] content;      
-            String fileExtension = applicationUtils.getFileExtension(fileName);     
+            String fileExtension = applicationUtils.getFileExtension(fileName);    
             try(InputStream fileStream = Files.newInputStream(filePath)){
                 content = fileStream.readAllBytes();
                 fileStream.close();

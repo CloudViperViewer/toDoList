@@ -1,3 +1,24 @@
 body{
-    background-color: blue;
+    background-color: white;
+    
+
+    /*center contents*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+#list_container
+{
+    /*border*/
+    border-radius: 40px;
+    box-shadow: -2px -2px 15px lightgray;
+    
+    /*container size*/
+    width: 95%;
+    height: 95%;
+
+    
 }
