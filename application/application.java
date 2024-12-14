@@ -44,6 +44,9 @@ public class application {
             case "/style.css":
                 fileName = "style.css";     
                 break;
+            case "/script.js":
+                fileName = "script.js";
+                break;
             default:
                 fileName = "index.html";
                 break;

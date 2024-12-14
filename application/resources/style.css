@@ -1,5 +1,5 @@
 body{
-    background-color: white;
+    background-color: #f7fdfe;
     
 
     /*center contents*/
@@ -20,6 +20,8 @@ body{
     width: 95%;
     height: 95%;
     padding: 15px;
+
+    background-color: white;
 
     
 }
@@ -47,5 +49,11 @@ body{
 .btn-primary:hover
 {
     cursor:pointer;
-    box-shadow: -2px -2px 15px #0047AB;
+    box-shadow: 2px 2px 15px #0047AB;
+    background-color: #0056d3;
+}
+
+.btn-primary:active
+{
+    transform: translateY(1px);
 }
