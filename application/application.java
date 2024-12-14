@@ -12,6 +12,8 @@ import com.sun.net.httpserver.HttpExchange;
 import server.server;
 import server.serverUtils;
 
+import application.tasks.CreateTask;
+
 
 public class application {
     
@@ -31,6 +33,10 @@ public class application {
     {
         System.out.println("Application Statup");
         currentServer.addContext("/", serverUtils.createHandle(this::returnIndex));
+       
+        new CreateTask(currentServer, BASE_PATH);    
+        
+        
     }
 
     private void returnIndex(HttpExchange exchange)

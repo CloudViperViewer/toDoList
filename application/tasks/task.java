@@ -124,7 +124,7 @@ public class Task {
      */
     public void setTaskDescription(String taskDescription)
     {
-        if(taskName.length() > NAME_CHARACTER_LIMIT)
+        if(taskName.length() > DESCRIPTION_CHARACTER_LIMIT)
         {
             throw new IllegalArgumentException(String.format("Task description cannot exceed %d characters", DESCRIPTION_CHARACTER_LIMIT));
             
