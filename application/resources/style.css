@@ -19,6 +19,33 @@ body{
     /*container size*/
     width: 95%;
     height: 95%;
+    padding: 15px;
 
     
+}
+
+#btn-container
+{
+    /*align elements to the right*/
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*primary button class*/
+.btn-primary
+{
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #0047AB;
+    border: none;
+    margin: 10px;
+}
+
+/*primary button class: hover*/
+.btn-primary:hover
+{
+    cursor:pointer;
+    box-shadow: -2px -2px 15px #0047AB;
 }

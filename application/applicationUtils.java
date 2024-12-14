@@ -8,7 +8,7 @@ public class applicationUtils {
     {
 
         if (filePath == null) {
-            return "";
+            return "txt";
         }
 
         int extIndex = filePath.lastIndexOf(".");
@@ -17,7 +17,7 @@ public class applicationUtils {
             return filePath.substring(extIndex+1);
         }
 
-        return "";
+        return "txt";
 
     }   
 }

@@ -68,7 +68,7 @@ public class application {
             String fileExtension = applicationUtils.getFileExtension(fileName);    
             try(InputStream fileStream = Files.newInputStream(filePath)){
                 content = fileStream.readAllBytes();
-                fileStream.close();
+             
             }            
 
             serverUtils.sendResponse(exchange, 200, content, serverUtils.CONTENT_TYPES.getOrDefault(fileExtension, "text/html; charset=UTF-8"));
