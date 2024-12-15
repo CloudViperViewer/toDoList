@@ -21,6 +21,14 @@ public class serverUtils {
         "txt", "text/plain; charset=UTF-8"
     );
 
+    public static final  Map<String, Integer> REPONSE_CODES = Map.of(
+        "Success", 200,
+        "Access denied", 403,
+        "File not found", 404,
+        "Internal server error", 500
+    );
+    
+
     public static HttpHandler createHandle(createHttpHandle handle)
     {
         return exchange -> handle.create(exchange);

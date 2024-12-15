@@ -12,6 +12,7 @@ public class server {
     
     private InetSocketAddress address;
     private HttpServer server;
+    private boolean isRunning = false;
 
 
     //Set basic server data and start up
@@ -24,6 +25,7 @@ public class server {
         server = HttpServer.create(address, 0);
 
         server.start();
+        isRunning = true;
         System.out.print("Server listening on port 8080....\n");
     }
 
@@ -33,6 +35,11 @@ public class server {
         server.createContext(path, handle);
     }
     
+
+    public boolean isRunning()
+    {
+        return isRunning;
+    }
   
 
 }

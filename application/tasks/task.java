@@ -7,7 +7,7 @@ public class Task {
     
     /*data fields*/
     private int id; /*Primary key should be set by db*/
-    private String taskName; /*Cannont be null*/
+    private String taskName; /*Cannot be null*/
     private String taskDescription; 
 
 
@@ -43,7 +43,7 @@ public class Task {
      * @param taskName - new task name
      * @param taskDescription - new task description
      */
-    public Task(String taskName, String TaskDescription)
+    public Task(String taskName, String taskDescription)
     {
         setTaskName(taskName);
         setTaskDescription(taskDescription);
@@ -54,7 +54,7 @@ public class Task {
     /*Getters*/
 
     /*
-     * @reutn The Unique Identifier of the task
+     * @return The Unique Identifier of the task
      */
     public int getId()
     {
@@ -119,7 +119,7 @@ public class Task {
 
     /*
      * Set task description
-     * @param taskDescription - new descripton of task
+     * @param taskDescription - new description of task
      * @return void
      */
     public void setTaskDescription(String taskDescription)
